@@ -71,14 +71,14 @@ configuration CreateHostPoolAndRegisterSessionHost
                 return @{'Result' = '' }
             }
             SetScript  = {
-                . (Join-Path $using:ScriptPath "Functions.ps1")
+                # . (Join-Path $using:ScriptPath "Functions.ps1")
                 
                 return . TryCatchHandleErrWithDetails -ScriptBlock {
                     return (& "$using:ScriptPath\Script-CreateHostPool.ps1" -RdBrokerURL $using:RDBrokerURL -DefinedTenantGroupName $using:DefinedTenantGroupName -TenantName $using:TenantName -HostPoolName $using:HostPoolName -Description $using:Description -FriendlyName $using:FriendlyName -TenantAdminCredentials $using:TenantAdminCredentials -isServicePrincipal $using:isServicePrincipal -aadTenantId $using:AadTenantId -EnablePersistentDesktop $using:EnablePersistentDesktop -RDPSModSource $using:RDPSModSource)
                 } -ErrMsg "Some error occurred in DSC SetScript CreateHostPool"
             }
             TestScript = {
-                . (Join-Path $using:ScriptPath "Functions.ps1")
+                # . (Join-Path $using:ScriptPath "Functions.ps1")
 
                 return . TryCatchHandleErrWithDetails -ScriptBlock {
                     return (& "$using:ScriptPath\Script-TestHostPoolExists.ps1" -RdBrokerURL $using:RDBrokerURL -DefinedTenantGroupName $using:DefinedTenantGroupName -TenantName $using:TenantName -HostPoolName $using:HostPoolName -TenantAdminCredentials $using:TenantAdminCredentials -isServicePrincipal $using:isServicePrincipal -aadTenantId $using:AadTenantId -RDPSModSource $using:RDPSModSource)
@@ -91,7 +91,7 @@ configuration CreateHostPoolAndRegisterSessionHost
                 return @{'Result' = '' }
             }
             SetScript  = {
-                . (Join-Path $using:ScriptPath "Functions.ps1")
+                # . (Join-Path $using:ScriptPath "Functions.ps1")
 
                 return . TryCatchHandleErrWithDetails -ScriptBlock {
                     & "$using:ScriptPath\Script-RegisterSessionHost.ps1" -RdBrokerURL $using:RDBrokerURL -DefinedTenantGroupName $using:DefinedTenantGroupName -TenantName $using:TenantName -HostPoolName $using:HostPoolName -Hours $using:Hours -TenantAdminCredentials $using:TenantAdminCredentials -isServicePrincipal $using:isServicePrincipal -aadTenantId $using:AadTenantId -RDPSModSource $using:RDPSModSource
@@ -99,7 +99,7 @@ configuration CreateHostPoolAndRegisterSessionHost
                 } -ErrMsg "Some error occurred in DSC SetScript RegisterSessionHostAndAddDefaultUsers"
             }
             TestScript = {
-                . (Join-Path $using:ScriptPath "Functions.ps1")
+                # . (Join-Path $using:ScriptPath "Functions.ps1")
 
                 return . TryCatchHandleErrWithDetails -ScriptBlock {
                     return (& "$using:ScriptPath\Script-TestRegisterSessionHost.ps1" -RdBrokerURL $using:RDBrokerURL -DefinedTenantGroupName $using:DefinedTenantGroupName -TenantName $using:TenantName -HostPoolName $using:HostPoolName -TenantAdminCredentials $using:TenantAdminCredentials -isServicePrincipal $using:isServicePrincipal -aadTenantId $using:AadTenantId -RDPSModSource $using:RDPSModSource)
