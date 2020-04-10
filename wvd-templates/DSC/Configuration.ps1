@@ -71,7 +71,7 @@ configuration CreateHostPoolAndRegisterSessionHost
                 return @{'Result' = '' }
             }
             SetScript  = {
-                # . (Join-Path $using:ScriptPath "Functions.ps1")
+                . (Join-Path $using:ScriptPath "Functions.ps1")
                 
                 return . TryCatchHandleErrWithDetails -ScriptBlock {
                     return (& "$using:ScriptPath\Script-CreateHostPool.ps1" -RdBrokerURL $using:RDBrokerURL -DefinedTenantGroupName $using:DefinedTenantGroupName -TenantName $using:TenantName -HostPoolName $using:HostPoolName -Description $using:Description -FriendlyName $using:FriendlyName -TenantAdminCredentials $using:TenantAdminCredentials -isServicePrincipal $using:isServicePrincipal -aadTenantId $using:AadTenantId -EnablePersistentDesktop $using:EnablePersistentDesktop -RDPSModSource $using:RDPSModSource)
